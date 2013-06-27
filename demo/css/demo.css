@@ -1,0 +1,36 @@
+.row-fluid .form-type{
+    padding : 20px;
+    border-right: 1px solid #dddddd;
+}
+.row-fluid.container{
+    width: 1100px;
+    margin: 0 auto;
+}
+table.table td{
+    vertical-align: middle;
+}
+table.table td input{
+    margin-bottom: 0;
+}
+.validate-show-block{
+    width: 500px;
+}
+ul.validate-show-block, ul.validate-show-block li{
+    list-style-type: none;
+}
+ul.validate-show-block li{
+    border-bottom: 1px solid #dddddd;
+}
+ul.validate-show-block .control-group{
+    margin-bottom: 0!important;
+    padding: 10px 0px 10px 0px;
+}
+ul.validate-show-block .control-group .control-label{
+    width: 100px;
+}
+.validate-footer{
+    height: 50px;
+    line-height: 50px;
+    text-align: right;
+    padding-right: 50px;
+}

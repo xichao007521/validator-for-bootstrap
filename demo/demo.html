@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>validator demo</title>
+    <meta charset="utf-8">
+    <link type="text/css" media="all" rel="stylesheet" href="css/bootstrap.min.css" >
+    <link type="text/css" media="all" rel="stylesheet" href="css/demo.css">
+    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../validate-message-zh.js"></script>
+    <script type="text/javascript" src="../validate-for-bootstrap.js"></script>
+</head>
+<body>
+    <section class="box">
+        <ul class="validate-show-block validate-container form-horizontal">
+            <li class="control-group">
+                <label class="control-label" for="type-0-name">name</label>
+                <div class="controls">
+                    <input type="text" id="type-0-name" validate-type="required" />
+                </div>
+            </li>
+            <li class="control-group">
+                <label class="control-label" for="type-0-email">email</label>
+                <div class="controls">
+                    <input type="text" id="type-0-email" validate-type="email" />
+                </div>
+            </li>
+            <li class="control-group">
+                <label class="control-label" for="type-0-number">number</label>
+                <div class="controls">
+                    <input type="text" id="type-0-number" validate-type="number" />
+                </div>
+            </li>
+            <li class="validate-footer">
+                <button class="btn btn-primary submit">确定</button>
+            </li>
+        </ul>
+        <ul class="validate-show-inline validate-container form-horizontal">
+            <li class="control-group">
+                <label class="control-label" for="type-1-name">name</label>
+                <div class="controls">
+                    <input type="text" id="type-1-name" validate-type="required" />
+                </div>
+            </li>
+            <li class="control-group">
+                <label class="control-label" for="type-1-email">email</label>
+                <div class="controls">
+                    <input type="text" id="type-1-email" validate-type="email" />
+                </div>
+            </li>
+            <li class="control-group">
+                <label class="control-label" for="type-1-number">number</label>
+                <div class="controls">
+                    <input type="text" id="type-1-number" validate-type="number" />
+                </div>
+            </li>
+            <li class="validate-footer">
+                <button class="btn btn-primary submit">确定</button>
+            </li>
+        </ul>
+    </section>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var validateShowBlockSetting = {
+            showType : 0,
+            callback : function(ipt){
+                alert($(ipt).val());
+            }
+        }
+        $(".validate-show-block").validate(validateShowBlockSetting);
+    });
+</script>
