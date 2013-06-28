@@ -1,9 +1,5 @@
-.row-fluid .form-type{
-    padding : 20px;
-    border-right: 1px solid #dddddd;
-}
-.row-fluid.container{
-    width: 1100px;
+section.box{
+    width: 1200px;
     margin: 0 auto;
 }
 table.table td{
@@ -15,17 +11,18 @@ table.table td input{
 .validate-show-block{
     width: 500px;
 }
-ul.validate-show-block, ul.validate-show-block li{
-    list-style-type: none;
+ul{
+    float: left;
 }
-ul.validate-show-block li{
+ul li{
+    list-style-type: none;
     border-bottom: 1px solid #dddddd;
 }
-ul.validate-show-block .control-group{
+ul .control-group{
     margin-bottom: 0!important;
     padding: 10px 0px 10px 0px;
 }
-ul.validate-show-block .control-group .control-label{
+ul .control-group .control-label{
     width: 100px;
 }
 .validate-footer{
@@ -33,4 +30,8 @@ ul.validate-show-block .control-group .control-label{
     line-height: 50px;
     text-align: right;
     padding-right: 50px;
+}
+
+.validate-show-inline{
+    width: 650px;
 }

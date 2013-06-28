@@ -5,29 +5,29 @@
         callback : function(){},
         validRules : {
             required : {
-                validate: function(value) {return ($.trim(value) != '');},
+                validate: function(ipt) {return ($.trim($(ipt).val()) != '');},
                 defaultHelpMsg: validateMessages['helpMsg']['required'],
                 defaultHintMsg : validateMessages['hintMsg']['required']
             },
             email : {
-                validate: function(value) {return (/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/.test(value));},
+                validate: function(ipt) {return (/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/.test($(ipt).val()));},
                 defaultHelpMsg: validateMessages['helpMsg']['email'],
                 defaultHintMsg : validateMessages['hintMsg']['email']
             },
             number : {
-                validate : function(value){return (/^\d+[\.]?\d*$/.test(value));},
+                validate : function(ipt){return (/^\d+[\.]?\d*$/.test($(ipt).val()));},
                 defaultHelpMsg: validateMessages['helpMsg']['number'],
                 defaultHintMsg: validateMessages['hintMsg']['number']
             },
             english : {
-                validate : function(value){return (/^(\w)+$/.test(value));},
+                validate : function(ipt){return (/^(\w)+$/.test($(ipt).val()));},
                 defaultHelpMsg: validateMessages['helpMsg']['english'],
                 defaultHintMsg: validateMessages['hintMsg']['english']
             }
         }
     }
     $.fn.validate = function(options) {
-        var opts = $.extend({}, defaultSettings, options);
+        var opts = $.extend(true, defaultSettings, options);
         return this.each(function() {
             var ipts = $(this).find("input[validate-type]");
             var showType = opts["showType"];
@@ -35,7 +35,7 @@
                 var validateType = $(this).attr("validate-type");
                 var validRule = opts.validRules[validateType];
                 var hintMsg = $(this).attr("hint-msg");
-                if(!hintMsg) hintMsg = validRule["defaultHintMsg"];
+                if(!hintMsg && validRule) hintMsg = validRule["defaultHintMsg"];
                 if(hintMsg) $(this).attr("placeholder", hintMsg);
 
                 $(this).blur(function(){
@@ -49,19 +49,24 @@
                     var validateType = $(this).attr("validate-type");
                     var validRule = opts.validRules[validateType];
                     pass = validateField(this, validRule, showType);
-                    if(!pass) return false;
+                    if(!pass) {
+                        $(this).focus().select();
+                        return false;
+                    }
                 });
-                if(pass) opts.callback.call(this, opts.callback.arguments);
+                if(pass) {
+                    opts.callback.call(this, opts.callback.arguments);
+                    if(this.tagName.toLowerCase() == "input" && $(this).attr("type") == "submit") $(this).submit();
+                }
             });
         });
     };
 
     function validateField(iptElem, validRule, showType){
         var ipt = $(iptElem);
-        var value = ipt.val();
         var helpMsg = ipt.attr("help-msg");
         if(!helpMsg) helpMsg = validRule["defaultHelpMsg"];
-        var pass = validRule["validate"].call(null, value);
+        var pass = validRule["validate"].call(null, iptElem);
         showResult(iptElem, pass, helpMsg, showType);
         return pass;
     }

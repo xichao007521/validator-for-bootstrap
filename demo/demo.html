@@ -54,6 +54,14 @@
                     <input type="text" id="type-1-number" validate-type="number" />
                 </div>
             </li>
+            <li class="control-group">
+                <label class="control-label" for="type-1-checkName">name</label>
+                <div class="controls">
+                    <input type="text" id="type-1-checkName" validate-type="chkName" />
+                    <span class="help-inline hide"></span>
+                    <img src="img/ajax-loader.gif" class="hide" />
+                </div>
+            </li>
             <li class="validate-footer">
                 <button class="btn btn-primary submit">确定</button>
             </li>
@@ -65,10 +73,44 @@
     $(document).ready(function(){
         var validateShowBlockSetting = {
             showType : 0,
-            callback : function(ipt){
-                alert($(ipt).val());
+            callback : function(){
+                alert("you are now fire submit : " + $(this).html());
             }
         }
+
         $(".validate-show-block").validate(validateShowBlockSetting);
+
+        var validateShowInlineSetting = {
+            showType : 1,
+            validRules : {
+                chkName : {
+                    validate : function(ipt){
+                        $(ipt).next("span").addClass("hide");
+                        var name = $(ipt).val();
+                        if(name != ""){
+                            // next step should do ajax request to check username
+                            //this example ,setTimeout imitates ajax, and return false
+                            //if ajax, should async : false, so when submit , we can get ajax result before submit.
+                            $(ipt).parent().find("img").removeClass("hide");
+                            setTimeout(function(){
+                                $(ipt).next("span").removeClass("hide").html("此用户名已经被使用");
+                                $(ipt).parent().find("img").addClass("hide");
+                            }, 1000);
+                            return false;
+                        }else{
+                            $(ipt).next("span").removeClass("hide").html("请输入用户名");
+                            return false;
+                        }
+                        return true;
+
+                    }
+                }
+            },
+            callback : function(ipt){
+                alert("you are now fire submit : " + $(this).html());
+            }
+        }
+
+        $(".validate-show-inline").validate(validateShowInlineSetting);
     });
 </script>
