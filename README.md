@@ -48,7 +48,7 @@
 
     var validateShowBlockSetting = {
 
-        showType : 0,  //0 -- block , 1 -- inline
+        showType : 0,  //0 -- block , 1 -- inline, 2 -- alert
 
         callback : function(){
 

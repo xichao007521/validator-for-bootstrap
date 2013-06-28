@@ -1,5 +1,6 @@
 section.box{
     width: 1200px;
+    padding-top: 50px;
     margin: 0 auto;
 }
 table.table td{
@@ -8,9 +9,7 @@ table.table td{
 table.table td input{
     margin-bottom: 0;
 }
-.validate-show-block{
-    width: 500px;
-}
+
 ul{
     float: left;
 }
@@ -31,7 +30,15 @@ ul .control-group .control-label{
     text-align: right;
     padding-right: 50px;
 }
-
+.validate-show-block{
+    width: 500px;
+    padding-right: 20px;
+    border-right: 1px solid #dddddd;
+}
 .validate-show-inline{
-    width: 650px;
+    width: 620px;
+}
+.validate-show-alert{
+    margin-top: 100px;
+    width: 100%;
 }

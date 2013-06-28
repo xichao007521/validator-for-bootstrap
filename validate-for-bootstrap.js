@@ -31,17 +31,19 @@
         return this.each(function() {
             var ipts = $(this).find("input[validate-type]");
             var showType = opts["showType"];
-            ipts.each(function(){
-                var validateType = $(this).attr("validate-type");
-                var validRule = opts.validRules[validateType];
-                var hintMsg = $(this).attr("hint-msg");
-                if(!hintMsg && validRule) hintMsg = validRule["defaultHintMsg"];
-                if(hintMsg) $(this).attr("placeholder", hintMsg);
+            if(showType != 2){
+                ipts.each(function(){
+                    var validateType = $(this).attr("validate-type");
+                    var validRule = opts.validRules[validateType];
+                    var hintMsg = $(this).attr("hint-msg");
+                    if(!hintMsg && validRule) hintMsg = validRule["defaultHintMsg"];
+                    if(hintMsg) $(this).attr("placeholder", hintMsg);
 
-                $(this).blur(function(){
-                    validateField(this, validRule, showType);
+                    $(this).blur(function(){
+                        validateField(this, validRule, showType);
+                    });
                 });
-            });
+            }
             var submitClass = opts["submitClass"];
             $(this).find("." + submitClass).click(function(){
                 var pass = true;
@@ -83,13 +85,22 @@
         else if(showType == 1) helpSpanClass = "help-inline";
         if(pass){
             controlGroup.removeClass("error");
-            ipt.next("span." + helpSpanClass).addClass("hide");
-        }else{
-            if(ipt.next("span." + helpSpanClass).size() == 0){
-                ipt.after($("<span class='" + helpSpanClass + "'>" + helpMsg + "</span>"));
+            if(showType != 2){
+                ipt.next("span." + helpSpanClass).addClass("hide");
+            }else if(showType == 2){
+                $(".error-container").addClass("hide");
             }
-            ipt.next("span." + helpSpanClass).removeClass("hide");
+        }else{
             controlGroup.addClass("error");
+            if(showType != 2){
+                if(ipt.next("span." + helpSpanClass).size() == 0){
+                    ipt.after($("<span class='" + helpSpanClass + "'>" + helpMsg + "</span>"));
+                }
+                ipt.next("span." + helpSpanClass).removeClass("hide");
+            }else if(showType == 2){
+                $(".error-container").removeClass("hide").html(helpMsg);
+            }
         }
+
     }
 })(jQuery)

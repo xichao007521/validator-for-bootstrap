@@ -12,6 +12,7 @@
 </head>
 <body>
     <section class="box">
+        <div class="alert alert-error error-container hide"></div>
         <ul class="validate-show-block validate-container form-horizontal">
             <li class="control-group">
                 <label class="control-label" for="type-0-name">name</label>
@@ -29,6 +30,12 @@
                 <label class="control-label" for="type-0-number">number</label>
                 <div class="controls">
                     <input type="text" id="type-0-number" validate-type="number" />
+                </div>
+            </li>
+            <li class="control-group">
+                <label class="control-label" for="type-0-english">english</label>
+                <div class="controls">
+                    <input type="text" id="type-0-english" validate-type="english" />
                 </div>
             </li>
             <li class="validate-footer">
@@ -58,6 +65,37 @@
                 <label class="control-label" for="type-1-checkName">name</label>
                 <div class="controls">
                     <input type="text" id="type-1-checkName" validate-type="chkName" />
+                    <span class="help-inline hide"></span>
+                    <img src="img/ajax-loader.gif" class="hide" />
+                </div>
+            </li>
+            <li class="validate-footer">
+                <button class="btn btn-primary submit">确定</button>
+            </li>
+        </ul>
+        <ul class="validate-show-alert validate-container form-horizontal">
+            <li class="control-group">
+                <label class="control-label" for="type-2-name">name</label>
+                <div class="controls">
+                    <input type="text" id="type-2-name" validate-type="required" />
+                </div>
+            </li>
+            <li class="control-group">
+                <label class="control-label" for="type-2-email">email</label>
+                <div class="controls">
+                    <input type="text" id="type-2-email" validate-type="email" />
+                </div>
+            </li>
+            <li class="control-group">
+                <label class="control-label" for="type-2-number">number</label>
+                <div class="controls">
+                    <input type="text" id="type-2-number" validate-type="number" />
+                </div>
+            </li>
+            <li class="control-group">
+                <label class="control-label" for="type-2-checkName">name</label>
+                <div class="controls">
+                    <input type="text" id="type-2-checkName" validate-type="chkName" />
                     <span class="help-inline hide"></span>
                     <img src="img/ajax-loader.gif" class="hide" />
                 </div>
@@ -111,6 +149,14 @@
             }
         }
 
-        $(".validate-show-inline").validate(validateShowInlineSetting);
+        var validateShowAlertSetting = {
+            showType : 2,
+            callback : function(){
+                alert("you are now fire submit : " + $(this).html());
+            }
+        }
+
+        $(".validate-show-alert").validate(validateShowAlertSetting);
+
     });
 </script>
